@@ -4,11 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"dark")}catch(e){}</script>
-<title>Jerson Tagulao — IT Student & Future Network Engineer</title>
+<title>Jerson Tagulao — IT Student &amp; Future Network Engineer</title>
 <meta name="description" content="Portfolio and resume of Jerson Tagulao, BSIT student at Dominican College of Tarlac — IT support, networking, and web development.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%23050507%27/%3E%3Ctext x=%2750%27 y=%2766%27 font-size=%2758%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23a78bfa%27 font-family=%27sans-serif%27%3EJT%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Jerson Tagulao — IT Support &amp; Network Technician Intern">
-<meta property="og:description" content="BSIT student: IT support, networking, and web development. View projects and download my resume.">
+<meta property="og:description" content="BSIT student: IT support, networking, and web development. View my projects and get in touch.">
+<!-- TODO: replace YOUR-SITE-URL with your real deployed URL -->
+<meta property="og:image" content="https://YOUR-SITE-URL/profile.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -75,9 +78,13 @@ html[data-theme="light"] .grain{background:radial-gradient(ellipse at 15% -10%,r
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
 
 /* nav */
-header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:18px 0;transition:background .4s,padding .4s;border-bottom:1px solid transparent}
-header.scrolled{background:rgba(5,5,7,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px 0;border-bottom-color:var(--border)}
-html[data-theme="light"] header.scrolled{background:rgba(223,226,232,.8)}
+header{position:fixed;top:0;left:0;width:100%;z-index:100;padding:18px 0;transition:padding .4s;border-bottom:1px solid transparent}
+/* blur lives on a pseudo-element so it doesn't trap the fixed mobile menu */
+header::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;
+  background:rgba(5,5,7,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+html[data-theme="light"] header::before{background:rgba(223,226,232,.8)}
+header.scrolled{padding:12px 0;border-bottom-color:var(--border)}
+header.scrolled::before{opacity:1}
 .nav-inner{display:flex;align-items:center;justify-content:space-between}
 .logo{font-family:var(--mono);font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:9px}
 .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
@@ -91,9 +98,9 @@ html[data-theme="light"] header.scrolled{background:rgba(223,226,232,.8)}
 .theme-toggle .knob{position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:var(--grad-accent);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
 html[data-theme="light"] .theme-toggle .knob{transform:translateX(24px)}
 .nav-toggle-btn{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer}
-@media(max-width:860px){
-  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(280px,80%);background:var(--bg-alt);border-left:1px solid var(--border);flex-direction:column;justify-content:center;align-items:flex-start;padding:40px;gap:26px;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);z-index:200}
-  .nav-links.open{transform:translateX(0)}
+@media(max-width:980px){
+  .nav-links{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:min(280px,80%);background:var(--bg-alt);border-left:1px solid var(--border);flex-direction:column;justify-content:center;align-items:flex-start;padding:40px;gap:26px;transform:translateX(100%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility .45s;z-index:200}
+  .nav-links.open{transform:translateX(0);visibility:visible}
   .nav-toggle-btn{display:block;z-index:210}
 }
 
@@ -131,7 +138,8 @@ html[data-theme="light"] .theme-toggle .knob{transform:translateX(24px)}
 .info-card .value{font-weight:600;font-size:.95rem;overflow-wrap:anywhere}
 
 /* skills */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;align-items:start}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:stretch}
+.skill-card.wide{grid-column:1/-1}
 .skill-card{padding:30px 26px}
 .skill-card h3{font-family:var(--display);font-size:1.15rem;margin-bottom:22px;display:flex;align-items:center;gap:10px}
 .skill-card h3::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--grad-accent);transform:rotate(45deg)}
@@ -153,10 +161,11 @@ html[data-theme="light"] .theme-toggle .knob{transform:translateX(24px)}
 .tl-card .school{color:var(--text-dim);font-size:.88rem;margin-bottom:10px}
 .tl-list{color:var(--text-dim);font-size:.86rem;padding-left:18px}.tl-list li{list-style:disc;margin-bottom:4px}
 
-/* certs */
+/* certs / achievements */
 .cert-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
 .cert-card{padding:28px;display:flex;gap:20px;transition:transform .35s,border-color .35s}
 .cert-card:hover{transform:translateY(-6px);border-color:var(--accent)}
+.cert-card.wide{grid-column:1/-1}
 .cert-badge{flex-shrink:0;width:56px;height:56px;border-radius:14px;background:var(--grad-btn);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;color:#fff;font-size:.9rem}
 .cert-body h3{font-family:var(--display);font-size:1.03rem;margin-bottom:6px}
 .cert-body p{color:var(--text-dim);font-size:.86rem;margin-bottom:10px}
@@ -166,8 +175,9 @@ html[data-theme="light"] .theme-toggle .knob{transform:translateX(24px)}
 .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .proj-card{overflow:hidden;display:flex;flex-direction:column;transition:transform .4s,border-color .4s}
 .proj-card:hover{transform:translateY(-8px);border-color:var(--accent)}
-.proj-thumb{height:170px;position:relative;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.proj-thumb{height:170px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
 .proj-thumb svg{width:56px;height:56px}
+.proj-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .proj-1 .proj-thumb{background:linear-gradient(135deg,#050507,#4c1d95)}
 .proj-2 .proj-thumb{background:linear-gradient(135deg,#6d28d9,#a78bfa)}
 .proj-3 .proj-thumb{background:linear-gradient(135deg,#6b7280,#c9ced6 60%,#a78bfa)}
@@ -185,6 +195,7 @@ html[data-theme="light"] .theme-toggle .knob{transform:translateX(24px)}
 .contact-info-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:24px}
 .contact-info-item .icon{width:42px;height:42px;border-radius:12px;background:var(--surface-strong);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
 .contact-info-item .value{font-weight:600;overflow-wrap:anywhere}
+.contact-info-item .value a:hover{color:var(--accent)}
 .social-row{display:flex;gap:12px;margin-top:26px}
 .social-row a{width:44px;height:44px;border-radius:12px;background:var(--surface-strong);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:600;transition:all .3s}
 .social-row a:hover{background:var(--grad-btn);color:#fff;transform:translateY(-4px)}
@@ -216,10 +227,13 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
 @media(max-width:980px){
   .hero-grid,.about-grid,.contact-wrap,.cert-grid{grid-template-columns:1fr}
   .hero-visual{order:-1}
-  .project-grid{grid-template-columns:1fr 1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:820px){
+  .project-grid{grid-template-columns:1fr}
 }
 @media(max-width:620px){
-  .project-grid,.info-grid{grid-template-columns:1fr}
+  .project-grid,.info-grid,.skills-grid{grid-template-columns:1fr}
   .section{padding:90px 0}
 }
 @media(prefers-reduced-motion:reduce){
@@ -241,7 +255,7 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
       <a href="#about" class="nav-link">About</a>
       <a href="#skills" class="nav-link">Skills</a>
       <a href="#education" class="nav-link">Education</a>
-      <a href="#certifications" class="nav-link">Certifications</a>
+      <a href="#certifications" class="nav-link">Achievements</a>
       <a href="#projects" class="nav-link">Projects</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
@@ -262,8 +276,7 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
       <div class="type-line mono">&gt; <span id="typeTarget"></span><span class="cursor">&nbsp;</span></div>
       <p class="hero-desc">IT student passionate about programming and continuously developing my skills in networking and technical support. I enjoy building software projects while strengthening my knowledge of Cisco routing and switching. My goal is to become a skilled Network Technician and eventually grow into a Network Engineer.</p>
       <div class="hero-actions">
-        <a href="resume.pdf" id="resumeBtn" class="btn btn-primary">Download resume</a>
-        <a href="#projects" class="btn btn-ghost">View projects</a>
+        <a href="#projects" class="btn btn-primary">View projects</a>
         <a href="#contact" class="btn btn-ghost">Contact me</a>
       </div>
       <div class="hero-stats">
@@ -298,10 +311,10 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
       </div>
       <div class="info-grid reveal">
         <div class="info-card glass"><div class="label">Full Name</div><div class="value">Jerson Tagulao</div></div>
-        <div class="info-card glass"><div class="label">Age</div><div class="value">21 years old</div></div>
+        <div class="info-card glass"><div class="label">Focus</div><div class="value">Networking &amp; Web Development</div></div>
         <div class="info-card glass"><div class="label">Email</div><div class="value">jersontagulao8@gmail.com</div></div>
-        <div class="info-card glass"><div class="label">Phone</div><div class="value">+63 994 460 4096</div></div>
-        <div class="info-card glass"><div class="label">Location</div><div class="value">Bamban, Tarlac, Philippines</div></div>
+        <div class="info-card glass"><div class="label">Status</div><div class="value">Open to OJT &amp; entry-level roles</div></div>
+        <div class="info-card glass"><div class="label">Location</div><div class="value">Tarlac, Philippines</div></div>
         <div class="info-card glass"><div class="label">School</div><div class="value">Dominican College of Tarlac</div></div>
       </div>
     </div>
@@ -343,10 +356,10 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
         <span class="tl-tag">Year 4 · Present</span>
         <h3>Capstone &amp; OJT Preparation</h3><div class="school">Dominican College of Tarlac</div>
         <ul class="tl-list">
-  <li>Developed a Ticketing System to manage and track support requests efficiently</li>
-  <li>Collaborated with a team to develop EvOSAS, a capstone project for managing student affairs and services</li>
-  <li>Improved my programming, networking, and troubleshooting skills through hands-on IT projects</li>
-</ul>
+          <li>Developed a Ticketing System to manage and track support requests efficiently</li>
+          <li>Collaborated with a team to develop EvOSAS, a capstone project for managing student affairs and services</li>
+          <li>Improved my programming, networking, and troubleshooting skills through hands-on IT projects</li>
+        </ul>
       </div></div>
       <div class="tl-item"><div class="tl-dot"></div><div class="tl-card glass">
         <span class="tl-tag">2025 – 2026 · Leadership</span>
@@ -357,13 +370,13 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
+<!-- ACHIEVEMENTS & CERTIFICATIONS -->
 <section class="section" id="certifications">
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow">certifications</div>
-      <h2 class="section-title">Cisco <span>coursework</span></h2>
-      <p class="section-sub">Completed CCNA courses through Cisco Networking Academy.</p>
+      <div class="eyebrow">achievements &amp; certifications</div>
+      <h2 class="section-title">Certifications <span>&amp; achievements</span></h2>
+      <p class="section-sub">Cisco Networking Academy coursework and student leadership.</p>
     </div>
     <div class="cert-grid">
       <div class="cert-card glass reveal">
@@ -373,6 +386,10 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
       <div class="cert-card glass reveal">
         <div class="cert-badge">CCNA</div>
         <div class="cert-body"><h3>Switching, Routing &amp; Wireless Essentials (SRWE)</h3><p>VLANs, inter-VLAN routing, STP, and wireless LAN configuration.</p><span class="cert-status">Completed</span></div>
+      </div>
+      <div class="cert-card glass reveal wide">
+        <div class="cert-badge">SSC</div>
+        <div class="cert-body"><h3>Student Discipline Officer</h3><p>Supreme Student Council, Dominican College of Tarlac — policy implementation, disciplinary records, and student governance.</p><span class="cert-status">2025 – 2026</span></div>
       </div>
     </div>
   </div>
@@ -388,7 +405,7 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
     </div>
     <div class="project-grid">
       <div class="proj-card glass proj-1 reveal">
-        <div class="proj-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/></svg></div>
+        <div class="proj-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/></svg><img src="proj-1.png" alt="EvOSAS screenshot" loading="lazy" onerror="this.remove()"></div>
         <div class="proj-body">
           <h3>EvOSAS: Student Discipline Management System</h3>
           <span class="proj-role mono">Role: Co-Programmer</span>
@@ -401,7 +418,7 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
         </div>
       </div>
       <div class="proj-card glass proj-2 reveal">
-        <div class="proj-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h7"/></svg></div>
+        <div class="proj-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h7"/></svg><img src="proj-2.png" alt="Ticketing System screenshot" loading="lazy" onerror="this.remove()"></div>
         <div class="proj-body">
           <h3>Ticketing System</h3>
           <span class="proj-role mono">Role: Full Stack Developer</span>
@@ -414,7 +431,7 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
         </div>
       </div>
       <div class="proj-card glass proj-3 reveal">
-        <div class="proj-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg></div>
+        <div class="proj-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg><img src="proj-3.png" alt="Portfolio website screenshot" loading="lazy" onerror="this.remove()"></div>
         <div class="proj-body">
           <h3>Portfolio Website</h3>
           <span class="proj-role mono">Role: Full Stack Developer</span>
@@ -441,8 +458,8 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
     <div class="contact-wrap">
       <div class="contact-info reveal">
         <div class="contact-info-item"><div class="icon">✉</div><div><div class="label">Email</div><div class="value">jersontagulao8@gmail.com</div></div></div>
-        <div class="contact-info-item"><div class="icon">☎</div><div><div class="label">Phone</div><div class="value">+63 994 460 4096</div></div></div>
-        <div class="contact-info-item"><div class="icon">⌖</div><div><div class="label">Location</div><div class="value">Bamban, Tarlac, Philippines</div></div></div>
+        <div class="contact-info-item"><div class="icon">in</div><div><div class="label">LinkedIn</div><div class="value"><a href="https://www.linkedin.com/in/jerson-tagulao-011725405" target="_blank" rel="noopener">jerson-tagulao</a></div></div></div>
+        <div class="contact-info-item"><div class="icon">⌖</div><div><div class="label">Location</div><div class="value">Tarlac, Philippines</div></div></div>
         <p>Find me online:</p>
         <div class="social-row">
           <a href="https://github.com/ukree1" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
@@ -473,7 +490,7 @@ footer p{color:var(--text-dimmer);font-size:.83rem}
 
 <footer>
   <div class="container">
-    <p>© <span id="year"></span> Jerson Tagulao. Built with HTML, CSS &amp; JavaScript.</p>
+    <p>© <span id="year"></span> Jerson Tagulao. All Rights Reserved.</p>
     <a href="#home" class="back-top" aria-label="Back to top">↑</a>
   </div>
 </footer>
@@ -520,10 +537,11 @@ let ri=0, ci=0, del=false;
 
 /* ---------- skills (data-driven) ---------- */
 const skills = {
-  "Networking":[["Cisco Packet Tracer",85],["Cisco IOS",78],["TCP/IP",82],["VLAN",75],["OSPF",68],["Routing & Switching",80]],
-  "Web Development":[["HTML5",90],["CSS3",88],["JavaScript",78],["React.js",68],["Bootstrap",80],["Firebase",65]],
-  "Development Tools":[["Visual Studio Code",90],["Git",75],["GitHub",78],["Vite",65]],
-  "Deployment":[["Firebase Hosting",75],["Vercel",70]],
+  "Networking":[["Cisco Packet Tracer",85],["Cisco IOS",78],["TCP/IP",82],["VLAN",85],["OSPF",68],["Routing & Switching",80]],
+  "Web Development":[["HTML5",90],["CSS3",88],["JavaScript",85],["React.js",85],["Bootstrap",83],["Firebase",88]],
+  "Programming & Frameworks":[["Python",94],["PHP",92],["Dart",92],["C++",91],["Laravel",90],["Flutter",90]],
+  "Databases & Deployment":[["SQL",93],["NoSQL",91],["Firebase Hosting",88],["Vercel",84]],
+  "Development Tools":[["Visual Studio Code",90],["Git",87],["GitHub",91],["Vite",94]],
   "Soft Skills":[["Problem Solving",88],["Communication",85],["Teamwork",90],["Time Management",82]]
 };
 const grid = document.getElementById('skillsGrid');
@@ -533,7 +551,7 @@ Object.entries(skills).forEach(([title, rows])=>{
     '<div class="skill-row" data-value="'+v+'"><div class="skill-row-top"><b>'+n.replace(/&/g,'&amp;')+'</b><span>'+v+'%</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>').join('');
   grid.appendChild(card);
 });
-const chips = document.createElement('div'); chips.className = 'skill-card glass reveal';
+const chips = document.createElement('div'); chips.className = 'skill-card glass reveal wide';
 chips.innerHTML = '<h3>IT Support</h3><div class="tech-tags" style="margin:0">' + ['Hardware Troubleshooting','Software Troubleshooting','Technical Support','Computer Networking','User Authentication','Role-based Access'].map(s=>'<span>'+s+'</span>').join('') + '</div>';
 grid.appendChild(chips);
 
@@ -548,31 +566,18 @@ document.querySelectorAll('.skill-row').forEach(r=>skillObserver.observe(r));
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ---------- resume download: uses your uploaded resume.pdf, falls back to a built-in copy ---------- */
-const RESUME_B64 = "JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUGFnZU1vZGUgL1VzZU5vbmUKL1BhZ2VzIDIgMCBSCi9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9Db3VudCAxCi9LaWRzIFsgMyAwIFIgXQovVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0Fubm90cyBbIDQgMCBSIDUgMCBSIDYgMCBSIDcgMCBSIF0KL0NvbnRlbnRzIDE0IDAgUgovTWVkaWFCb3ggWyAwIDAgNjEyIDc5MiBdCi9QYXJlbnQgMiAwIFIKL1Jlc291cmNlcyA8PAovRm9udCA5IDAgUgovUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PgovUm90YXRlIDAKL1RyYW5zIDw8Cj4+Ci9UeXBlIC9QYWdlCj4+CmVuZG9iago0IDAgb2JqCjw8Ci9BIDw8Ci9TIC9VUkkKL1R5cGUgL0FjdGlvbgovVVJJIChtYWlsdG9cMDcyamVyc29udGFndWxhbzhcMTAwZ21haWxcMDU2Y29tKQo+PgovQm9yZGVyIFsgMCAwIDAgXQovUmVjdCBbIDE5NC4xMTggNzAxLjQgMzAzLjI4OCA3MTIuMiBdCi9TdWJ0eXBlIC9MaW5rCi9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKNSAwIG9iago8PAovQSA8PAovUyAvVVJJCi9UeXBlIC9BY3Rpb24KL1VSSSAoaHR0cHNcMDcyXDA1N1wwNTd1a3JlZTFcMDU2Z2l0aHViXDA1NmlvXDA1N015UmVzdW1lXDA1NykKPj4KL0JvcmRlciBbIDAgMCAwIF0KL1JlY3QgWyAzMTAuNjMyIDcwMS40IDQ1Mi4xOTMgNzEyLjIgXQovU3VidHlwZSAvTGluawovVHlwZSAvQW5ub3QKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0EgPDwKL1MgL1VSSQovVHlwZSAvQWN0aW9uCi9VUkkgKGh0dHBzXDA3MlwwNTdcMDU3dGlja2V0aW5nXDA1NXN5c3RlbVwwNTV6ZXRhXDA1NXN0ZWVsXDA1NnZlcmNlbFwwNTZhcHApCj4+Ci9Cb3JkZXIgWyAwIDAgMCBdCi9SZWN0IFsgNDUuNiA0NDEuODg3NSAyMjkuMDc5NyA0NTMuODg3NSBdCi9TdWJ0eXBlIC9MaW5rCi9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKNyAwIG9iago8PAovQSA8PAovUyAvVVJJCi9UeXBlIC9BY3Rpb24KL1VSSSAoaHR0cHNcMDcyXDA1N1wwNTdldm9zYXNcMDU1ZGN0XDA1NmNvbVwwNTcpCj4+Ci9Cb3JkZXIgWyAwIDAgMCBdCi9SZWN0IFsgNDUuNiAzNTQuOTg3NSAxNDEuMjIyNiAzNjYuOTg3NSBdCi9TdWJ0eXBlIC9MaW5rCi9UeXBlIC9Bbm5vdAo+PgplbmRvYmoKOCAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0KL0xlbmd0aCAyNDk0Cj4+CnN0cmVhbQpHYXVgVT8kazlwJz49LkRSJmNQRls6TkJHVFEhaF04Vzt0Y01qM0FEMmlHJW5DLlYnIlA1V2gsNUpGSFNgMFg9OEBYLmAvIkMjJ3NmcFNCa0YoUms2TSpGRSxuJkdETTRMa0FdSkVZb2NKWERsNGhFQ01FTW5ebWNDOD5RWDJSRWxbZSshSU9YdVctbTJKQyMvMHRZNmFhYS1STCxmXShqZCsqNkxSXUxNXCsxbjlrR2hsLyZtXm82PGk7RXU9MCwhO2hyN1QrNkcpPE9lWlklPWlNJ1pmISNYaHNkV1c+aCEjVylgLFw2Zzl1N1Vsc1hKbW1SNjNaQSMmP0dDXEcqOnNIaytVaiozSWxzZmBEYC8tQylbXWgnXl4zITRhPCwoWFRhPnNDNytAIUFpLiYwOU5hbVpUMm8wO2sySTk6Y2BHRyslNUZHJmZQMG1EUjs7VjpwKD1PdGNIbGZKSCdiZT8yRTFVWCFvX25IKnJaaT0qZys6SjFxKllWZHAja0coVjBVOmZeTVRZMmtfNFFtbVo+az0hXGE+WmdZVjJiVmkqcyZOa3MvNT1yVnNMXmNkTSNbXTBtQnFDc11tTF5IXkBgUipoZD8sLFAzcm9odCRCMDAsT0ckP2MpJ21lJkxQRC1ITVJkMFJKVlFpRyc/bkZWPzdUcEVpZm5tUEAndEw2OlgiakIwInB1R1coYU4kNEBbX3VqLEUpQmhLTF5FdUtKXmpTUT1USzo0LSdKQiplYVZnSChHL1hjbkdKb0tKWyRlXEIkOSdAcXEtPTlMLUojKEc7O3JBOUo4OSQvZ00zWHNQdTohTW1tcUByXmJiN19rVHVgInQuWydJMl5zKG5LViopMkYjRk9mNkdaXy1cSkFTO1E2WSREb0dRSSUlJCExO1dRUmA2cFsvKS5JQC1faENLMDZiSGBtcUFiN1Vvck86ZjRxMVcsS08vVExgSipKIUFaO3NfXzphRnE9OCQ0azdvUC0qVSpLVEgxMkcsKkNpLyhdOmJdZ2BUcUEycThrPl5WIi4oYSFMXV8lLGtIMDxHRWBTY2JmYjE2UjxrQGRkNzE2VjZsLWdzNmlAUVw/LyI+SCNqVyxbIyFPJlMqO1hAM0NMSyhDOi9mKWk0L1JrMCxDbFhOW3ElVjJjWDtGUFM4PiFhSTklU3VHUj4yQUFaZElFRVUoITAqRUE9NFtwcFxzXUhtWGRnSmoyJyUzTjtgPjwzUkBDLlM7OzU+WSIlSkVudEs+Lmt0NVktNTJFYXBBVz0nP0lwLVRDPXE2LDZFLFZjPjNkSGVEVjkxZmUqQildOy46TG4oPDNwYDI+PS8qNUtARkteby0sZStcUjJgNy88Tyg8dDglMT4wWUtHVSopOW4/aVRLaiJlW2VzIjBVUUowSCdOUGZdYD9iXzBoWW5UKixVRDI+X19cV3FILmlgamIqTUpfcVMqKj0mUGFgLzpIMT48SSlIaiYhYUBKc2RdTENyVzldNz43ZkRlbSNYW3FkLjZFRmhCLkQ5LWVaOkRjPmllIWhvLVQ+LTIpTidPUCZOLzJPNl8mJml1SEY+OklwQmlwSChWTDpFc0M9XDVOYVplJDNIUjNCbTlOU1FgQW02TDgsSUgsUm1edEYnUyJwLCVDcSEmalVVMGwsNEhgLmhyTy1ocWxBNyEsO19xMElkYG4pYVJkMFB0Ymw4PTtRbylocmllQEBGO2JVTGMpOVRLRVVIWzhaTyclcmBvdTVXT1Q7aC43RTAyMDVsPzgwTVg9YUpNOC5MLW4sUDUmLHJNTkJHWCs8KnNDV0tEXElPQTZzQ3BWUSg9K3I/PXFPOydnJEBjUUpwPDgyTj9XXl1PUUQqJyVvbTRxWlArOD9yIWBXTUcmVHFjclpUMUk3TSdEcV42Q3NxMlFOXU9zLVpPcVMmOUYnVD5TTFduJ0BPbz9oJC9LMFEqW2orYGdbK0NaODovb09Fc1hMVW0tXFpjVmAxYCxDbm8pQmklWSVXZ0klQ2kiOTBSSmJtKVs+WTtwJ1clXnEiKUk2b19OMDckNSNQJiRKPEAwalE+dWA0PE5NMiplQls1OWhGOm4kaC9nJ0lZZzIxQz5pNGhLVV5hVldbUlwwcVAmaVtqSEJPbm5aMkxHamk7TSpmOGZTbj9gO1EzZS0sVSlhYVImOW1HRWs8cU5DPSpwU1RZOm9gTU0vZllbOldHKWNHTW91PEJVZC9HM2NiZFUuVCVdRT4xNlctPjRDTm5XLipxcVFEIiUrODNvV1JbMyJKcG1Iaz4vaCpdcVpTa1hoWmslbilFTjhTITdCZ003QT0uQlBXRVhlPlBaSE9MJ1E6Rm4wRVc3XlRjUCtIVmtMO2k9O2BeSGwnLXAzZU9xWGVONDFgL2FeW1wtZiZPQlJRcHFKMDdDVihlN0A+dE8tMV0yaFI8KClAS1w1LTFfb2U5KS1qLSohLTFbKUI3OFZYdVVLPW1vO0otR3JTVEJwbmVBPz1FImRLayYoNExgYDFJZ0M+WUlyJC0+T1YxXi0xa0dkNCkjKGtyRCJFYVoxRGBPQWZvaGA8ayRwNihBMmpPJnUwJEAwb2hRWHBcak1TSipjIyUqYm9NVVheO2YsM0poImpEPldpI1E+byQ4XUQ0ZCQ+Y29sZ2E3STRbLEFjNEFcJHAsJE5bJi0lITorPyUycCEhdXEqOzI2XD49cVFGbz1PPS5XbzI/MzdnO1I2JXUuSVAzSko0RjNaIjRFImohMC8hdCIqVSkmQFgvM21XRC1oRS1uNU5jMkpCLFcqN0lMPmI2OTRGcGBkPUQsKVpxZWA8XGkkdGFGMScmKy08TiRlLk1QcikwY0hebFNxZFxyZkdXa28+KyV1NFEwaVkvT0YmP2hgVFw+aVlNZjRtTmxHX2oxTCQzLyk5NWMmVG8hLEhXMi83TmtZO0dhXFByLldVaCpMS2ZaYiZmMjE5QjROP1phal0jQCJjKysmWCRLQXItP0txSTpQZC1ENHVJU0RVblhCKmtcL0dpRGszM2MiUzFKU0FBQ2VBNDs+VDFjVmtVVWQiclAmK0pxQFQ0cUBHUUpRXzRMOjhaRCk3JDgiPmFjXGhqPz5ZO00ocDxFNT9IcDFdYG8rYU9sWGo4P0VLRS44aF5ocSYiQkBvamwvLU9GaFZFI1FpKWt0RjZuSHA6ZFMwNkBdOlxFTGEtVz9WVT0jQiVfbzQ1VEI1U0lXMGtYLkVDOl1eY2ZYXHJUdFIuUzhBbDZGSittQ2hIRF5HMUlrRyw/c0VYV2g4XnAoTz5Bb2gpVFlvUjVXKHE/JDVNPFwiQFgwMDFwci1xI34+CmVuZHN0cmVhbQplbmRvYmoKOSAwIG9iago8PAovRjEgMTAgMCBSCi9GMiAxMSAwIFIKL0YzIDEyIDAgUgo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcKL05hbWUgL0YxCi9TdWJ0eXBlIC9UeXBlMQovVHlwZSAvRm9udAo+PgplbmRvYmoKMTEgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtQm9sZAovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwovTmFtZSAvRjIKL1N1YnR5cGUgL1R5cGUxCi9UeXBlIC9Gb250Cj4+CmVuZG9iagoxMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCi9OYW1lIC9GMwovU3VidHlwZSAvVHlwZTEKL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjEzIDAgb2JqCjw8Ci9BdXRob3IgKFwwNTBhbm9ueW1vdXNcMDUxKQovQ3JlYXRpb25EYXRlIChEXDA3MjIwMjYwNzMxMTMzMjU2XDA1MzAwXDA0NzAwXDA0NykKL0NyZWF0b3IgKFwwNTB1bnNwZWNpZmllZFwwNTEpCi9LZXl3b3JkcyAoKQovTW9kRGF0ZSAoRFwwNzIyMDI2MDczMTEzMzI1NlwwNTMwMFwwNDcwMFwwNDcpCi9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IFwwNTUgXDA1MG9wZW5zb3VyY2VcMDUxKQovU3ViamVjdCAoXDA1MHVuc3BlY2lmaWVkXDA1MSkKL1RpdGxlIChcMDUwYW5vbnltb3VzXDA1MSkKL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iagoxNCAwIG9iago8PAovTGVuZ3RoIDc5MDMKPj4Kc3RyZWFtCjEgMCAwIDEgMCAwIGNtICBCVCAvRjEgMTIgVGYgMTQuNCBUTCBFVApxCjEgMCAwIDEgNDUuNiA3MzMuMiBjbQpxCi45IC4zNiAuMTMgcmcKQlQgMSAwIDAgMSAwIDIgVG0gL0YyIDIyIFRmIDI0IFRMIChKRVJTT04gVEFHVUxBTykgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDcxNi4yIGNtCnEKQlQgMSAwIDAgMSAwIDIuNSBUbSAxNSBUTCAvRjIgMTIuNSBUZiAwIDAgMCByZyAoSVQgU1VQUE9SVCAmIE5FVFdPUksgVEVDSE5JQ0lBTiBJTlRFUk4pIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA3MDAuMiBjbQpxCkJUIDEgMCAwIDEgMCAzIFRtIDEyIFRMIC9GMSA5IFRmIDAgMCAwIHJnIChCYW1iYW4gVGFybGFjIHwgKzYzIDk5NCA0NjAgNDA5NiB8ICkgVGogMCAwIDEgcmcgKGplcnNvbnRhZ3VsYW84QGdtYWlsLmNvbSkgVGogMCAwIDAgcmcgKCB8ICkgVGogMCAwIDEgcmcgKGh0dHBzOi8vdWtyZWUxLmdpdGh1Yi5pby9NeVJlc3VtZS8pIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA2OTIuMiBjbQpRCnEKMSAwIDAgMSA0NS42IDY5MS4yIGNtCnEKMSB3CjEgSgouOSAuMzYgLjEzIFJHCm4gMCAwIG0gNTIwLjggMCBsIFMKUQpRCnEKMSAwIDAgMSA0NS42IDY4NS4yIGNtClEKcQoxIDAgMCAxIDQ1LjYgNjcyLjIgY20KcQouOSAuMzYgLjEzIHJnCkJUIDEgMCAwIDEgMCAyIFRtIC9GMiAxMSBUZiAxMyBUTCAoT0JKRUNUSVZFKSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgNjY5LjIgY20KUQpxCjEgMCAwIDEgNDUuNiA2NjguNDUgY20KcQouNzUgdwoxIEoKLjkgLjM2IC4xMyBSRwpuIDAgMCBtIDUyMC44IDAgbCBTClEKUQpxCjEgMCAwIDEgNDUuNiA2NjMuNDUgY20KUQpxCjEgMCAwIDEgNDUuNiA2MDMuNDUgY20KcQouMTUgLjE1IC4xNSByZwpCVCAxIDAgMCAxIDAgNTAuOCBUbSAvRjEgOS4yIFRmIDEyIFRMIChJJ20gYSBCUyBJbmZvcm1hdGlvbiBUZWNobm9sb2d5IHN0dWRlbnQgd2l0aCBhIHNvbGlkIGZvdW5kYXRpb24gaW4gSVQgc3VwcG9ydCwgY29tcHV0ZXIgbmV0d29ya2luZywgYW5kIHdlYi1iYXNlZCBzeXN0ZW0pIFRqIFQqIChkZXZlbG9wbWVudCwgYW5kIEknbSBlYWdlciB0byBsZWFybiBhbmQgZ3JvdyBpbiBoYXJkd2FyZSBhbmQgc29mdHdhcmUgdHJvdWJsZXNob290aW5nLiBDb21wbGV0ZWQgQ2lzY28gTmV0d29ya2luZykgVGogVCogKEFjYWRlbXkgQ0NOQSBjb3Vyc2VzIGluIEludHJvZHVjdGlvbiB0byBOZXR3b3JrcyBhbmQgU3dpdGNoaW5nLCBSb3V0aW5nLCBhbmQgV2lyZWxlc3MgRXNzZW50aWFscy4gU2Vla2luZyBhbiBPSlQpIFRqIFQqIChvcHBvcnR1bml0eSBhcyBhbiBJVCBIZWxwIERlc2ssIEp1bmlvciBXZWIgRGV2ZWxvcGVyLCBvciBOZXR3b3JrIFRlY2huaWNpYW4gdG8gYXBwbHkgYW5kIGZ1cnRoZXIgZGV2ZWxvcCBteSB0ZWNobmljYWwgc2tpbGxzKSBUaiBUKiAod2hpbGUgY29udHJpYnV0aW5nIHRvIG9yZ2FuaXphdGlvbmFsIGltcHJvdmVtZW50cy4pIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA1OTUuNDUgY20KUQpxCjEgMCAwIDEgNDUuNiA1OTQuNDUgY20KcQoxIHcKMSBKCi45IC4zNiAuMTMgUkcKbiAwIDAgbSA1MjAuOCAwIGwgUwpRClEKcQoxIDAgMCAxIDQ1LjYgNTg4LjQ1IGNtClEKcQoxIDAgMCAxIDQ1LjYgNTc1LjQ1IGNtCnEKLjkgLjM2IC4xMyByZwpCVCAxIDAgMCAxIDAgMiBUbSAvRjIgMTEgVGYgMTMgVEwgKEVEVUNBVElPTikgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDU3Mi40NSBjbQpRCnEKMSAwIDAgMSA0NS42IDU3MS43IGNtCnEKLjc1IHcKMSBKCi45IC4zNiAuMTMgUkcKbiAwIDAgbSA1MjAuOCAwIGwgUwpRClEKcQoxIDAgMCAxIDQ1LjYgNTY2LjcgY20KUQpxCjEgMCAwIDEgNDUuNiA1NTMuNyBjbQpxCkJUIDEgMCAwIDEgMCAzIFRtIDEzIFRMIC9GMiAxMCBUZiAwIDAgMCByZyAoQmFjaGVsb3Igb2YgU2NpZW5jZSBpbiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5KSBUaiAvRjEgMTAgVGYgKCAgKSBUaiAoICkgVGogKHwpIFRqICggKSBUaiAoICAyMDIzIC0gUHJlc2VudCBcKEV4cGVjdGVkIEdyYWR1YXRpb246IDIwMjdcKSkgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDU0MS43IGNtCnEKLjE1IC4xNSAuMTUgcmcKQlQgMSAwIDAgMSAwIDIuNyBUbSAvRjMgOS4zIFRmIDEyIFRMIChEb21pbmljYW4gQ29sbGVnZSBvZiBUYXJsYWMpIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA1MjcuOSBjbQpxCkJUIDEgMCAwIDEgMTIgMi42IFRtIDExLjggVEwgL0YxIDkuMiBUZiAuMTUgLjE1IC4xNSByZyAoXDE3NykgVGogKCApIFRqICggKSBUaiAoV2ViIERldmVsb3BtZW50IGFuZCBTeXN0ZW1zIEFuYWx5c2lzIGFuZCBEZXNpZ24pIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA1MTQuNiBjbQpxCkJUIDEgMCAwIDEgMTIgMi42IFRtIDExLjggVEwgL0YxIDkuMiBUZiAuMTUgLjE1IC4xNSByZyAoXDE3NykgVGogKCApIFRqICggKSBUaiAoQ29tcHV0ZXIgTmV0d29ya3MpIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA1MDguMSBjbQpRCnEKMSAwIDAgMSA0NS42IDUwNy4xIGNtCnEKMSB3CjEgSgouOSAuMzYgLjEzIFJHCm4gMCAwIG0gNTIwLjggMCBsIFMKUQpRCnEKMSAwIDAgMSA0NS42IDUwMS4xIGNtClEKcQoxIDAgMCAxIDQ1LjYgNDg4LjEgY20KcQouOSAuMzYgLjEzIHJnCkJUIDEgMCAwIDEgMCAyIFRtIC9GMiAxMSBUZiAxMyBUTCAoUFJPSkVDVFMpIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA0ODUuMSBjbQpRCnEKMSAwIDAgMSA0NS42IDQ4NC4zNSBjbQpxCi43NSB3CjEgSgouOSAuMzYgLjEzIFJHCm4gMCAwIG0gNTIwLjggMCBsIFMKUQpRCnEKMSAwIDAgMSA0NS42IDQ3OS4zNSBjbQpRCnEKMSAwIDAgMSA0NS42IDQ2Ni4zNSBjbQpxCkJUIDEgMCAwIDEgMCAzIFRtIDEzIFRMIC9GMiAxMCBUZiAwIDAgMCByZyAoSVQgVGlja2V0aW5nIFN5c3RlbSB8IFJlYWN0LCBGaXJlYmFzZSwgSmF2YVNjcmlwdCkgVGogL0YxIDEwIFRmICggICkgVGogKCApIFRqICh8KSBUaiAoICkgVGogKCAgMjAyNikgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDQ1NC4zNSBjbQpxCi4xNSAuMTUgLjE1IHJnCkJUIDEgMCAwIDEgMCAyLjcgVG0gL0YzIDkuMyBUZiAxMiBUTCAoRnVsbCBTdGFjayBEZXZlbG9wZXIpIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA0NDAuMzUgY20KcQowIDAgMSByZwpCVCAxIDAgMCAxIDAgMi43IFRtIC9GMyA5LjMgVGYgMTIgVEwgKGh0dHBzOi8vdGlja2V0aW5nLXN5c3RlbS16ZXRhLXN0ZWVsLnZlcmNlbC5hcHApIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiA0MjYuNTUgY20KcQpCVCAxIDAgMCAxIDEyIDIuNiBUbSAxMS44IFRMIC9GMSA5LjIgVGYgLjE1IC4xNSAuMTUgcmcgKFwxNzcpIFRqICggKSBUaiAoICkgVGogKERldmVsb3BlZCBhIHdlYi1iYXNlZCBJVCBUaWNrZXRpbmcgU3lzdGVtIHRoYXQgYWxsb3dzIHVzZXJzIHRvIHN1Ym1pdCwgbW9uaXRvciwgYW5kIHRyYWNrIElUIHN1cHBvcnQgcmVxdWVzdHMuKSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgNDEzLjI1IGNtCnEKQlQgMSAwIDAgMSAxMiAyLjYgVG0gMTEuOCBUTCAvRjEgOS4yIFRmIC4xNSAuMTUgLjE1IHJnIChcMTc3KSBUaiAoICkgVGogKCApIFRqIChJbXBsZW1lbnRlZCBzZWN1cmUgdXNlciBhdXRoZW50aWNhdGlvbiwgcm9sZS1iYXNlZCBhY2Nlc3MgY29udHJvbCwgYW5kIHJlYWwtdGltZSB0aWNrZXQgdXBkYXRlcyB1c2luZyBGaXJlYmFzZS4pIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiAzOTkuOTUgY20KcQpCVCAxIDAgMCAxIDEyIDIuNiBUbSAxMS44IFRMIC9GMSA5LjIgVGYgLjE1IC4xNSAuMTUgcmcgKFwxNzcpIFRqICggKSBUaiAoICkgVGogKERlcGxveWVkIHRoZSBhcHBsaWNhdGlvbiBvbiBWZXJjZWwgYW5kIG1hbmFnZWQgc291cmNlIGNvZGUgdXNpbmcgR2l0IGFuZCBHaXRIdWIuKSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgMzkyLjQ1IGNtClEKcQoxIDAgMCAxIDQ1LjYgMzc5LjQ1IGNtCnEKQlQgMSAwIDAgMSAwIDMgVG0gMTMgVEwgL0YyIDEwIFRmIDAgMCAwIHJnIChFdk9TQVMgU3R1ZGVudCBEaXNjaXBsaW5lIE1hbmFnZW1lbnQgU3lzdGVtIHwgUmVhY3QsIEZpcmViYXNlLCBKYXZhU2NyaXB0KSBUaiAvRjEgMTAgVGYgKCAgKSBUaiAoICkgVGogKHwpIFRqICggKSBUaiAoICAyMDI1LTIwMjYpIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiAzNjcuNDUgY20KcQouMTUgLjE1IC4xNSByZwpCVCAxIDAgMCAxIDAgMi43IFRtIC9GMyA5LjMgVGYgMTIgVEwgKENvIFByb2dyYW1tZXIpIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiAzNTMuNDUgY20KcQowIDAgMSByZwpCVCAxIDAgMCAxIDAgMi43IFRtIC9GMyA5LjMgVGYgMTIgVEwgKGh0dHBzOi8vZXZvc2FzLWRjdC5jb20vKSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgMzI3Ljg1IGNtCnEKQlQgMSAwIDAgMSAxMiAxNC40IFRtIDExLjggVEwgL0YxIDkuMiBUZiAuMTUgLjE1IC4xNSByZyAoXDE3NykgVGogKCApIFRqICggKSBUaiAoQ29udHJpYnV0ZWQgdG8gdGhlIGRldmVsb3BtZW50IG9mIGEgd2ViLWJhc2VkIG1hbmFnZW1lbnQgc3lzdGVtIGZvciB0aGUgT2ZmaWNlIG9mIFN0dWRlbnQgQWZmYWlycyBhbmQgU2VydmljZXMpIFRqIFQqIChcKE9TQVNcKS4pIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiAzMTQuNTUgY20KcQpCVCAxIDAgMCAxIDEyIDIuNiBUbSAxMS44IFRMIC9GMSA5LjIgVGYgLjE1IC4xNSAuMTUgcmcgKFwxNzcpIFRqICggKSBUaiAoICkgVGogKEFzc2lzdGVkIGluIGRldmVsb3BpbmcgbW9kdWxlcyBmb3Igc3R1ZGVudCBkaXNjaXBsaW5hcnkgcmVjb3JkcyBhbmQgY2FzZSBtYW5hZ2VtZW50LikgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDMwMS4yNSBjbQpxCkJUIDEgMCAwIDEgMTIgMi42IFRtIDExLjggVEwgL0YxIDkuMiBUZiAuMTUgLjE1IC4xNSByZyAoXDE3NykgVGogKCApIFRqICggKSBUaiAoQ29sbGFib3JhdGVkIHdpdGggdGhlIGRldmVsb3BtZW50IHRlYW0gdXNpbmcgUmVhY3QsIEZpcmViYXNlLCBIVE1MLCBDU1MsIEphdmFTY3JpcHQsIGFuZCBGaXJlYmFzZS4pIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiAyOTQuNzUgY20KUQpxCjEgMCAwIDEgNDUuNiAyOTMuNzUgY20KcQoxIHcKMSBKCi45IC4zNiAuMTMgUkcKbiAwIDAgbSA1MjAuOCAwIGwgUwpRClEKcQoxIDAgMCAxIDQ1LjYgMjg3Ljc1IGNtClEKcQoxIDAgMCAxIDQ1LjYgMjc0Ljc1IGNtCnEKLjkgLjM2IC4xMyByZwpCVCAxIDAgMCAxIDAgMiBUbSAvRjIgMTEgVGYgMTMgVEwgKExFQURFUlNISVApIFRqIFQqIEVUClEKUQpxCjEgMCAwIDEgNDUuNiAyNzEuNzUgY20KUQpxCjEgMCAwIDEgNDUuNiAyNzEgY20KcQouNzUgdwoxIEoKLjkgLjM2IC4xMyBSRwpuIDAgMCBtIDUyMC44IDAgbCBTClEKUQpxCjEgMCAwIDEgNDUuNiAyNjYgY20KUQpxCjEgMCAwIDEgNDUuNiAyNTMgY20KcQpCVCAxIDAgMCAxIDAgMyBUbSAxMyBUTCAvRjIgMTAgVGYgMCAwIDAgcmcgKFN1cHJlbWUgU3R1ZGVudCBDb3VuY2lsIFwoU1NDXCkpIFRqIC9GMSAxMCBUZiAoICApIFRqICggKSBUaiAofCkgVGogKCApIFRqICggIDIwMjUgLSAyMDI2KSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgMjQxIGNtCnEKLjE1IC4xNSAuMTUgcmcKQlQgMSAwIDAgMSAwIDIuNyBUbSAvRjMgOS4zIFRmIDEyIFRMIChTdHVkZW50IERpc2NpcGxpbmUgT2ZmaWNlcikgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDIyNyBjbQpxCi4xNSAuMTUgLjE1IHJnCkJUIDEgMCAwIDEgMCAyLjcgVG0gL0YzIDkuMyBUZiAxMiBUTCAoRG9taW5pY2FuIENvbGxlZ2Ugb2YgVGFybGFjKSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgMjEzLjIgY20KcQpCVCAxIDAgMCAxIDEyIDIuNiBUbSAxMS44IFRMIC9GMSA5LjIgVGYgLjE1IC4xNSAuMTUgcmcgKFwxNzcpIFRqICggKSBUaiAoICkgVGogKEFzc2lzdGVkIGluIGltcGxlbWVudGluZyBzY2hvb2wgcG9saWNpZXMgYW5kIGRpc2NpcGxpbmFyeSBwcm9jZWR1cmVzLikgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDE5OS45IGNtCnEKQlQgMSAwIDAgMSAxMiAyLjYgVG0gMTEuOCBUTCAvRjEgOS4yIFRmIC4xNSAuMTUgLjE1IHJnIChcMTc3KSBUaiAoICkgVGogKCApIFRqIChNYWludGFpbmVkIGFjY3VyYXRlIGRpc2NpcGxpbmFyeSByZWNvcmRzIGFuZCBkb2N1bWVudGF0aW9uLikgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDE4Ni42IGNtCnEKQlQgMSAwIDAgMSAxMiAyLjYgVG0gMTEuOCBUTCAvRjEgOS4yIFRmIC4xNSAuMTUgLjE1IHJnIChcMTc3KSBUaiAoICkgVGogKCApIFRqIChTdHJlbmd0aGVuZWQgbGVhZGVyc2hpcCwgY29tbXVuaWNhdGlvbiwgdGVhbXdvcmssIGFuZCBvcmdhbml6YXRpb25hbCBza2lsbHMgdGhyb3VnaCBhY3RpdmUgc3R1ZGVudCBnb3Zlcm5hbmNlLikgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDE4MC4xIGNtClEKcQoxIDAgMCAxIDQ1LjYgMTc5LjEgY20KcQoxIHcKMSBKCi45IC4zNiAuMTMgUkcKbiAwIDAgbSA1MjAuOCAwIGwgUwpRClEKcQoxIDAgMCAxIDQ1LjYgMTczLjEgY20KUQpxCjEgMCAwIDEgNDUuNiAxNjAuMSBjbQpxCkJUIDEgMCAwIDEgMCAyIFRtIDEzIFRMIC9GMiAxMSBUZiAuOSAuMzYgLjEzIHJnIChDRVJUSUZJQ0FUSU9OUyAmIExJQ0VOU0VTKSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgMTU3LjEgY20KUQpxCjEgMCAwIDEgNDUuNiAxNTYuMzUgY20KcQouNzUgdwoxIEoKLjkgLjM2IC4xMyBSRwpuIDAgMCBtIDUyMC44IDAgbCBTClEKUQpxCjEgMCAwIDEgNDUuNiAxNTEuMzUgY20KUQpxCjEgMCAwIDEgNDUuNiAxMzkuNTUgY20KcQpCVCAxIDAgMCAxIDEyIDIuNiBUbSAxMS44IFRMIC9GMSA5LjIgVGYgLjE1IC4xNSAuMTUgcmcgKFwxNzcpIFRqICggKSBUaiAoICkgVGogKENpc2NvIE5ldHdvcmtpbmcgQWNhZGVteSAtIENDTkE6IEludHJvZHVjdGlvbiB0byBOZXR3b3JrcyBcKElUTlwpKSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgMTI2LjI1IGNtCnEKQlQgMSAwIDAgMSAxMiAyLjYgVG0gMTEuOCBUTCAvRjEgOS4yIFRmIC4xNSAuMTUgLjE1IHJnIChcMTc3KSBUaiAoICkgVGogKCApIFRqIChDaXNjbyBOZXR3b3JraW5nIEFjYWRlbXkgLSBDQ05BOiBTd2l0Y2hpbmcsIFJvdXRpbmcsIGFuZCBXaXJlbGVzcyBFc3NlbnRpYWxzIFwoU1JXRVwpKSBUaiBUKiBFVApRClEKcQoxIDAgMCAxIDQ1LjYgMTE5Ljc1IGNtClEKcQoxIDAgMCAxIDQ1LjYgMTE4Ljc1IGNtCnEKMSB3CjEgSgouOSAuMzYgLjEzIFJHCm4gMCAwIG0gNTIwLjggMCBsIFMKUQpRCnEKMSAwIDAgMSA0NS42IDExMi43NSBjbQpRCnEKMSAwIDAgMSA0NS42IDk5Ljc1IGNtCnEKLjkgLjM2IC4xMyByZwpCVCAxIDAgMCAxIDAgMiBUbSAvRjIgMTEgVGYgMTMgVEwgKFNLSUxMUykgVGogVCogRVQKUQpRCnEKMSAwIDAgMSA0NS42IDk2Ljc1IGNtClEKcQoxIDAgMCAxIDQ1LjYgOTYgY20KcQouNzUgdwoxIEoKLjkgLjM2IC4xMyBSRwpuIDAgMCBtIDUyMC44IDAgbCBTClEKUQpxCjEgMCAwIDEgNDUuNiA5MSBjbQpRCnEKMSAwIDAgMSA0NS42IDY3LjQgY20KcQpCVCAxIDAgMCAxIDEyIDE0LjQgVG0gMTEuOCBUTCAvRjEgOS4yIFRmIC4xNSAuMTUgLjE1IHJnIChcMTc3KSBUaiAoICkgVGogKCApIFRqIChJVCBTdXBwb3J0OyBOZXR3b3JrIFRlY2huaWNpYW47IENvbXB1dGVyIE5ldHdvcmtpbmc7IEhhcmR3YXJlIFRyb3VibGVzaG9vdGluZzsgU29mdHdhcmUgVHJvdWJsZXNob290aW5nOyBUZWNobmljYWwpIFRqIFQqIChTdXBwb3J0OyBSZWFjdDsgSFRNTDsgQ1NTOyBKYXZhU2NyaXB0OyBGaXJlYmFzZTsgR2l0OyBHaXRIdWI7IFVzZXIgQXV0aGVudGljYXRpb247IFJvbGUtYmFzZWQgQWNjZXNzKSBUaiBUKiBFVApRClEKIAoKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgMTUKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDE1IDAwMDAwIG4gCjAwMDAwMDAwODMgMDAwMDAgbiAKMDAwMDAwMDE0MiAwMDAwMCBuIAowMDAwMDAwMzY4IDAwMDAwIG4gCjAwMDAwMDA1NTIgMDAwMDAgbiAKMDAwMDAwMDc1MSAwMDAwMCBuIAowMDAwMDAwOTY5IDAwMDAwIG4gCjAwMDAwMDExNTggMDAwMDAgbiAKMDAwMDAwMzc0NCAwMDAwMCBuIAowMDAwMDAzNzk4IDAwMDAwIG4gCjAwMDAwMDM5MDYgMDAwMDAgbiAKMDAwMDAwNDAxOSAwMDAwMCBuIAowMDAwMDA0MTM1IDAwMDAwIG4gCjAwMDAwMDQ0NjAgMDAwMDAgbiAKdHJhaWxlcgo8PAovU2l6ZSAxNQovUm9vdCAxIDAgUgovSW5mbyAxMyAwIFIKL0lEIFsgPDIyMmJlYjg0YzdlY2I5ZjI0ZDExYjEzYTc4NjdlOTc0PiA8MjIyYmViODRjN2VjYjlmMjRkMTFiMTNhNzg2N2U5NzQ+IF0KPj4Kc3RhcnR4cmVmCjEyNDE2CiUlRU9GCg==";
-function saveBlob(blob){
-  const url = URL.createObjectURL(blob), a = document.createElement('a');
-  a.href = url; a.download = 'Jerson-Tagulao-Resume.pdf'; document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url), 2000);
-}
-document.getElementById('resumeBtn').addEventListener('click', async function(e){
-  e.preventDefault();
-  try{
-    const res = await fetch('resume.pdf', {cache:'no-cache'});
-    if(!res.ok || !(res.headers.get('content-type')||'').includes('pdf')) throw new Error('missing');
-    saveBlob(await res.blob());
-  }catch(_){
-    const bin = atob(RESUME_B64), bytes = new Uint8Array(bin.length);
-    for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i);
-    saveBlob(new Blob([bytes], {type:'application/pdf'}));
-  }
-});
-
-/* ---------- profile picture: tries profile.jpg / .jpeg / .png / .webp ---------- */
+/* ---------- profile picture: tries profile.jpg / .jpeg / .png / .webp, falls back to initials ---------- */
 (function(){
   const img = document.getElementById('profilePic');
   const exts = ['jpg','jpeg','png','webp','JPG','PNG']; let i = 0;
-  img.onerror = ()=>{ i++; if(i < exts.length) img.src = 'profile.' + exts[i]; else img.remove(); };
+  img.onerror = ()=>{
+    i++;
+    if(i < exts.length) img.src = 'profile.' + exts[i];
+    else {
+      img.remove();
+      document.querySelector('.avatar-inner').insertAdjacentHTML('beforeend','<span style="font:700 4rem var(--display);color:var(--accent)">JT</span>');
+    }
+  };
   img.src = 'profile.' + exts[0];
 })();
 
@@ -582,7 +587,7 @@ function openThanks(){ thanksModal.classList.add('show'); document.getElementByI
 function closeThanks(){ thanksModal.classList.remove('show'); }
 document.getElementById('thanksClose').addEventListener('click', closeThanks);
 thanksModal.addEventListener('click', e=>{ if(e.target === thanksModal) closeThanks(); });
-document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeThanks(); });
+document.addEventListener('keydown', e=>{ if(e.key === 'Escape'){ closeThanks(); navLinks.classList.remove('open'); navToggleBtn.textContent = '☰'; } });
 
 /* ---------- contact form: sends real email via FormSubmit (no mail app needed) ---------- */
 document.getElementById('contactForm').addEventListener('submit', async function(e){
